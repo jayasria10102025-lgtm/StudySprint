@@ -1,0 +1,24 @@
+{
+  "name": "studysprint-workspace",
+  "version": "1.0.0",
+  "description": "StudySprint – Full-Stack Focused Study Session Tracker",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "backend": "cd backend && npm start",
+    "backend:dev": "cd backend && npm run dev",
+    "frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "test:backend": "cd backend && node test-backend.js"
+  },
+  "keywords": [
+    "studysprint",
+    "study-tracker",
+    "full-stack",
+    "mongodb",
+    "express",
+    "react",
+    "tailwind"
+  ],
+  "author": "StudySprint Team",
+  "license": "ISC"
+}
