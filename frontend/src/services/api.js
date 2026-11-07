@@ -1,7 +1,23 @@
 import axios from 'axios';
 
+// Resolve and normalize the API base URL
+export const getBaseURL = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  let url = envUrl || (import.meta.env.DEV ? '/api' : 'https://studysprint-pjlu.onrender.com/api');
+
+  // Strip trailing slashes
+  url = url.trim().replace(/\/+$/, '');
+
+  // If absolute HTTP/HTTPS URL and missing the /api route prefix, append /api
+  if (/^https?:\/\//i.test(url) && !url.endsWith('/api')) {
+    url = `${url}/api`;
+  }
+
+  return url;
+};
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: getBaseURL(),
   headers: {
     'Content-Type': 'application/json'
   }
@@ -10,6 +26,10 @@ const api = axios.create({
 // Attach Authorization header if token exists
 api.interceptors.request.use(
   (config) => {
+    // In case baseURL was dynamically resolved
+    if (!config.baseURL) {
+      config.baseURL = getBaseURL();
+    }
     const token = localStorage.getItem('studysprint_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -24,7 +44,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      // If unauthorized and we had a token, clear it
+      // If unauthorized and we had a token, clear it and redirect to login
       const hadToken = !!localStorage.getItem('studysprint_token');
       if (hadToken && !window.location.pathname.includes('/login') && !window.location.pathname.includes('/register')) {
         localStorage.removeItem('studysprint_token');
@@ -37,4 +57,3 @@ api.interceptors.response.use(
 );
 
 export default api;
-
