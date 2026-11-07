@@ -2,6 +2,7 @@ const express = require('express');
 const {
   getSessions,
   getActiveSession,
+  getSessionById,
   startSession,
   pauseSession,
   resumeSession,
@@ -14,6 +15,7 @@ const {
   startSessionValidation,
   sessionActionValidation
 } = require('../validators/sessionValidators');
+const { idParamValidation } = require('../validators/subjectValidators');
 
 const router = express.Router();
 
@@ -21,7 +23,8 @@ router.use(protect);
 
 router.get('/', getSessions);
 router.get('/active', getActiveSession);
-router.post('/start', startSessionValidation, validate, startSession);
+router.get('/:id', idParamValidation, validate, getSessionById);
+router.post(['/', '/start'], startSessionValidation, validate, startSession);
 router.patch('/:id/pause', sessionActionValidation, validate, pauseSession);
 router.patch('/:id/resume', sessionActionValidation, validate, resumeSession);
 router.patch('/:id/complete', sessionActionValidation, validate, completeSession);

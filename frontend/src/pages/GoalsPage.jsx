@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Target,
   Plus,
@@ -17,6 +18,7 @@ import { ConfirmModal } from '../components/ConfirmModal';
 import { formatMinutesToHours, formatDate } from '../utils/formatters';
 
 export const GoalsPage = () => {
+  const navigate = useNavigate();
   const [goals, setGoals] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -348,7 +350,7 @@ export const GoalsPage = () => {
               : 'Set your first academic goal to track planned duration against actual focus time.'
           }
           actionText={subjects.length === 0 ? 'Create Subject' : 'Add Study Goal'}
-          onAction={subjects.length === 0 ? () => (window.location.href = '/subjects') : openCreateModal}
+          onAction={subjects.length === 0 ? () => navigate('/subjects') : openCreateModal}
         />
       )}
 

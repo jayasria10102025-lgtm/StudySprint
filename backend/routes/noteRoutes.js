@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   getNotes,
+  getNoteById,
   createNote,
   updateNote,
   deleteNote
@@ -24,7 +25,9 @@ router
 
 router
   .route('/:id')
+  .get(idParamValidation, validate, getNoteById)
   .put(updateNoteValidation, validate, updateNote)
+  .patch(updateNoteValidation, validate, updateNote)
   .delete(idParamValidation, validate, deleteNote);
 
 module.exports = router;

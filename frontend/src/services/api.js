@@ -23,12 +23,16 @@ const api = axios.create({
   }
 });
 
-// Attach Authorization header if token exists
+// Attach Authorization header and sanitize duplicate /api prefixes
 api.interceptors.request.use(
   (config) => {
     // In case baseURL was dynamically resolved
     if (!config.baseURL) {
       config.baseURL = getBaseURL();
+    }
+    // Prevent accidental /api/api double prefix
+    if (config.baseURL && config.baseURL.endsWith('/api') && config.url && config.url.startsWith('/api/')) {
+      config.url = config.url.replace(/^\/api/, '');
     }
     const token = localStorage.getItem('studysprint_token');
     if (token) {

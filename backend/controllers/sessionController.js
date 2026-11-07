@@ -102,6 +102,34 @@ const getActiveSession = async (req, res, next) => {
   }
 };
 
+// @desc    Get single study session by ID
+// @route   GET /api/sessions/:id
+// @access  Private
+const getSessionById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user._id;
+
+    const session = await StudySession.findOne({ _id: id, userId })
+      .populate('subjectId', 'name color')
+      .populate('goalId', 'title plannedDuration targetDate');
+
+    if (!session) {
+      return res.status(404).json({
+        success: false,
+        message: 'Session not found or access denied'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: session
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // @desc    Start a new study session
 // @route   POST /api/sessions/start
 // @access  Private
@@ -395,6 +423,7 @@ const cancelSession = async (req, res, next) => {
 module.exports = {
   getSessions,
   getActiveSession,
+  getSessionById,
   startSession,
   pauseSession,
   resumeSession,

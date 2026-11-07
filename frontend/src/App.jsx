@@ -31,9 +31,14 @@ export default function App() {
             <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/timer" element={<FocusTimerPage />} />
+              <Route path="/focus-timer" element={<FocusTimerPage />} />
               <Route path="/goals" element={<GoalsPage />} />
+              <Route path="/study-goals" element={<GoalsPage />} />
               <Route path="/subjects" element={<SubjectsPage />} />
+              <Route path="/academic-subjects" element={<SubjectsPage />} />
+              <Route path="/my-subjects" element={<SubjectsPage />} />
               <Route path="/notes" element={<NotesPage />} />
+              <Route path="/study-notes" element={<NotesPage />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
               <Route path="/settings" element={<SettingsPage />} />
             </Route>

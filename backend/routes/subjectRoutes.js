@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   getSubjects,
+  getSubjectById,
   createSubject,
   updateSubject,
   deleteSubject
@@ -24,7 +25,9 @@ router
 
 router
   .route('/:id')
+  .get(idParamValidation, validate, getSubjectById)
   .put(updateSubjectValidation, validate, updateSubject)
+  .patch(updateSubjectValidation, validate, updateSubject)
   .delete(idParamValidation, validate, deleteSubject);
 
 module.exports = router;

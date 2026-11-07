@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   getGoals,
+  getGoalById,
   createGoal,
   updateGoal,
   deleteGoal
@@ -24,7 +25,9 @@ router
 
 router
   .route('/:id')
+  .get(idParamValidation, validate, getGoalById)
   .put(updateGoalValidation, validate, updateGoal)
+  .patch(updateGoalValidation, validate, updateGoal)
   .delete(idParamValidation, validate, deleteGoal);
 
 module.exports = router;

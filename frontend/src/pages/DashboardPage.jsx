@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Clock,
   Calendar,
@@ -50,6 +50,7 @@ const CustomChartTooltip = ({ active, payload, label }) => {
 };
 
 export const DashboardPage = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [overview, setOverview] = useState(null);
   const [dailyData, setDailyData] = useState([]);
@@ -188,7 +189,7 @@ export const DashboardPage = () => {
               title="No study activity recorded yet"
               description="Start a focus session to record your daily minutes and watch your activity graph populate."
               actionText="Start Focus Session"
-              onAction={() => window.location.href = '/timer'}
+              onAction={() => navigate('/timer')}
             />
           )}
         </div>
@@ -252,7 +253,7 @@ export const DashboardPage = () => {
                 title="No subject time recorded"
                 description="Assign study sessions to subjects to track time distribution."
                 actionText="Add Subjects"
-                onAction={() => window.location.href = '/subjects'}
+                onAction={() => navigate('/subjects')}
               />
             )}
           </div>
@@ -305,7 +306,7 @@ export const DashboardPage = () => {
               title="No active study goals"
               description="Define weekly or target goals to measure planned vs actual focused study time."
               actionText="Create Goal"
-              onAction={() => window.location.href = '/goals'}
+              onAction={() => navigate('/goals')}
             />
           )}
         </div>
@@ -393,7 +394,7 @@ export const DashboardPage = () => {
               title="No study sessions logged yet"
               description="Start your first study sprint using the Focus Timer to see your verified sessions list here."
               actionText="Open Focus Timer"
-              onAction={() => window.location.href = '/timer'}
+              onAction={() => navigate('/timer')}
             />
           )}
         </div>

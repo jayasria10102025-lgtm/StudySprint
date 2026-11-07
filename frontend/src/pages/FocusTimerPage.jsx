@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Play,
   Pause,
@@ -304,12 +305,12 @@ export const FocusTimerPage = () => {
           {subjects.length === 0 && !loadingMetadata ? (
             <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-sm flex items-center justify-between">
               <span>You don't have any subjects yet. Create your first subject to begin tracking!</span>
-              <a
-                href="/subjects"
+              <Link
+                to="/subjects"
                 className="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold"
               >
                 Add Subject
-              </a>
+              </Link>
             </div>
           ) : (
             <form onSubmit={handleStart} className="space-y-4">

@@ -49,8 +49,8 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
 }
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
+// Health check endpoints
+app.get(['/api/health', '/health'], (req, res) => {
   res.status(200).json({
     status: 'ok',
     service: 'StudySprint API',
@@ -59,17 +59,26 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// API Routes
+// API Routes (Primary /api endpoints with plural, singular, and feature aliases)
 app.use('/api/auth', authRoutes);
-app.use('/api/subjects', subjectRoutes);
-app.use('/api/goals', goalRoutes);
-app.use('/api/sessions', sessionRoutes);
-app.use('/api/notes', noteRoutes);
+app.use(['/api/subjects', '/api/subject', '/api/academic-subjects'], subjectRoutes);
+app.use(['/api/goals', '/api/goal', '/api/study-goals'], goalRoutes);
+app.use(['/api/sessions', '/api/session', '/api/timer', '/api/focus-timer'], sessionRoutes);
+app.use(['/api/notes', '/api/note', '/api/study-notes'], noteRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/users', userRoutes);
 
+// Compatibility Root Routes (Handles requests omitting /api prefix)
+app.use('/auth', authRoutes);
+app.use(['/subjects', '/subject', '/academic-subjects'], subjectRoutes);
+app.use(['/goals', '/goal', '/study-goals'], goalRoutes);
+app.use(['/sessions', '/session', '/timer', '/focus-timer'], sessionRoutes);
+app.use(['/notes', '/note', '/study-notes'], noteRoutes);
+app.use('/analytics', analyticsRoutes);
+app.use('/users', userRoutes);
+
 // Handle undefined API endpoints
-app.all('/api/*', (req, res) => {
+app.all(['/api/*', '/*'], (req, res) => {
   res.status(404).json({
     success: false,
     message: `API endpoint ${req.method} ${req.originalUrl} not found`

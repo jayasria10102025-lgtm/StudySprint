@@ -79,6 +79,31 @@ const getSubjects = async (req, res, next) => {
   }
 };
 
+// @desc    Get single subject by ID
+// @route   GET /api/subjects/:id
+// @access  Private
+const getSubjectById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user._id;
+
+    const subject = await Subject.findOne({ _id: id, userId });
+    if (!subject) {
+      return res.status(404).json({
+        success: false,
+        message: 'Subject not found or access denied'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: subject
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // @desc    Create new subject
 // @route   POST /api/subjects
 // @access  Private
@@ -229,6 +254,7 @@ const deleteSubject = async (req, res, next) => {
 
 module.exports = {
   getSubjects,
+  getSubjectById,
   createSubject,
   updateSubject,
   deleteSubject

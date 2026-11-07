@@ -37,6 +37,31 @@ const getNotes = async (req, res, next) => {
   }
 };
 
+// @desc    Get single note by ID
+// @route   GET /api/notes/:id
+// @access  Private
+const getNoteById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user._id;
+
+    const note = await StudyNote.findOne({ _id: id, userId }).populate('subjectId', 'name color');
+    if (!note) {
+      return res.status(404).json({
+        success: false,
+        message: 'Note not found or access denied'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: note
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // @desc    Create study note
 // @route   POST /api/notes
 // @access  Private
@@ -146,6 +171,7 @@ const deleteNote = async (req, res, next) => {
 
 module.exports = {
   getNotes,
+  getNoteById,
   createNote,
   updateNote,
   deleteNote

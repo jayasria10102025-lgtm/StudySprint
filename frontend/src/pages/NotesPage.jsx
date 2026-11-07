@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   FileText,
   Plus,
@@ -16,6 +17,7 @@ import { ConfirmModal } from '../components/ConfirmModal';
 import { formatDate } from '../utils/formatters';
 
 export const NotesPage = () => {
+  const navigate = useNavigate();
   const [notes, setNotes] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -277,7 +279,7 @@ export const NotesPage = () => {
               : 'Write down summaries, key theorems, equations, and cheat-sheets for your subjects.'
           }
           actionText={subjects.length === 0 ? 'Create Subject First' : 'Create First Note'}
-          onAction={subjects.length === 0 ? () => (window.location.href = '/subjects') : openCreateModal}
+          onAction={subjects.length === 0 ? () => navigate('/subjects') : openCreateModal}
         />
       )}
 

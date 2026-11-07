@@ -99,6 +99,31 @@ const getGoals = async (req, res, next) => {
   }
 };
 
+// @desc    Get single goal by ID
+// @route   GET /api/goals/:id
+// @access  Private
+const getGoalById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user._id;
+
+    const goal = await StudyGoal.findOne({ _id: id, userId }).populate('subjectId', 'name color');
+    if (!goal) {
+      return res.status(404).json({
+        success: false,
+        message: 'Goal not found or access denied'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: goal
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // @desc    Create study goal
 // @route   POST /api/goals
 // @access  Private
@@ -219,6 +244,7 @@ const deleteGoal = async (req, res, next) => {
 
 module.exports = {
   getGoals,
+  getGoalById,
   createGoal,
   updateGoal,
   deleteGoal

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   BookOpen,
   Plus,
@@ -255,18 +256,18 @@ export const SubjectsPage = () => {
 
               {/* Quick Action Footer */}
               <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-                <a
-                  href="/timer"
+                <Link
+                  to="/timer"
                   className="text-purple-400 hover:text-purple-300 font-medium inline-flex items-center gap-1"
                 >
                   <Clock className="w-3 h-3" /> Focus on this subject
-                </a>
-                <a
-                  href="/notes"
+                </Link>
+                <Link
+                  to="/notes"
                   className="text-slate-400 hover:text-slate-200"
                 >
                   View Notes →
-                </a>
+                </Link>
               </div>
             </div>
           ))}
