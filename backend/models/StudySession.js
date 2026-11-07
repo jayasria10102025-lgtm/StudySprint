@@ -71,3 +71,4 @@ studySessionSchema.index({ userId: 1, status: 1 });
 studySessionSchema.index({ userId: 1, startTime: -1 });
 
 module.exports = mongoose.model('StudySession', studySessionSchema);
+

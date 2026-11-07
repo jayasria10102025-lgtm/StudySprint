@@ -28,3 +28,4 @@ router.patch('/:id/complete', sessionActionValidation, validate, completeSession
 router.patch('/:id/cancel', sessionActionValidation, validate, cancelSession);
 
 module.exports = router;
+

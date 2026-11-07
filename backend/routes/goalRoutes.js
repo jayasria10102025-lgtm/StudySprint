@@ -28,3 +28,4 @@ router
   .delete(idParamValidation, validate, deleteGoal);
 
 module.exports = router;
+

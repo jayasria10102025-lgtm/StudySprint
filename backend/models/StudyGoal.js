@@ -55,3 +55,4 @@ studyGoalSchema.index({ userId: 1, targetDate: 1 });
 studyGoalSchema.index({ userId: 1, subjectId: 1 });
 
 module.exports = mongoose.model('StudyGoal', studyGoalSchema);
+

@@ -346,3 +346,4 @@ npm run build
 5. **Environment Variables**:
    - `VITE_API_URL`: `https://your-backend-app.onrender.com/api`
 6. Add Rewrite Rule: Source: `/*`, Destination: `/index.html` (for React client-side routing).
+

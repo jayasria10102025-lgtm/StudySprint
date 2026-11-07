@@ -21,3 +21,4 @@ router.get('/subjects', getSubjectDistribution);
 router.get('/planned-vs-completed', getPlannedVsCompleted);
 
 module.exports = router;
+

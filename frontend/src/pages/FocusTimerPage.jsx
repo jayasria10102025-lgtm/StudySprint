@@ -422,3 +422,4 @@ export const FocusTimerPage = () => {
     </div>
   );
 };
+

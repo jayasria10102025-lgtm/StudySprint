@@ -378,3 +378,4 @@ export const NotesPage = () => {
     </div>
   );
 };
+

@@ -34,3 +34,4 @@ studyNoteSchema.index({ userId: 1, subjectId: 1 });
 studyNoteSchema.index({ userId: 1, title: 'text', content: 'text' });
 
 module.exports = mongoose.model('StudyNote', studyNoteSchema);
+

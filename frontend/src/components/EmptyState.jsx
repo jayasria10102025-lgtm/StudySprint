@@ -21,3 +21,4 @@ export const EmptyState = ({ icon: Icon, title, description, actionText, onActio
     </div>
   );
 };
+

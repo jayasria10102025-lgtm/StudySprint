@@ -150,3 +150,4 @@ module.exports = {
   updateNote,
   deleteNote
 };
+

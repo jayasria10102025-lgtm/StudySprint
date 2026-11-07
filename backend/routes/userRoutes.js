@@ -15,3 +15,4 @@ router.put('/profile', updateProfileValidation, validate, updateProfile);
 router.put('/change-password', changePasswordValidation, validate, changePassword);
 
 module.exports = router;
+

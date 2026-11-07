@@ -24,3 +24,4 @@ router.post('/login', authLimiter, loginValidation, validate, login);
 router.get('/me', protect, getMe);
 
 module.exports = router;
+

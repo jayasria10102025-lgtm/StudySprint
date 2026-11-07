@@ -55,3 +55,4 @@ export const StatCard = ({ title, value, subtitle, icon: Icon, badge, color = 'p
     </div>
   );
 };
+

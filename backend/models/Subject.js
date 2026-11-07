@@ -34,3 +34,4 @@ const subjectSchema = new mongoose.Schema(
 subjectSchema.index({ userId: 1, name: 1 }, { unique: true });
 
 module.exports = mongoose.model('Subject', subjectSchema);
+
